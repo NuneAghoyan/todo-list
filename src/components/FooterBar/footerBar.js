@@ -8,9 +8,9 @@ export default {
                 'Contact Us',
             ],
             icons: [
-                'facebook',
-                'linkedin',
-                'instagram',
+                'mdi-facebook',
+                'mdi-linkedin',
+                'mdi-instagram',
             ],
         }
     },

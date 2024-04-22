@@ -1,11 +1,15 @@
 <template>
     <v-container>
-        <task-modal v-if="isTaskModalOpen" :isOpen="isTaskModalOpen" @close="toggleTaskModal" @taskSave="onTaskSave"
-            :isEmpty="isTitleEmpty" />
+        <task-modal v-if="isTaskModalOpen" :isOpen="isTaskModalOpen" @close="toggleTaskModal" @taskSave="onTaskSave" />
         <v-row align="center" justify="center">
-            <v-col cols="auto">
+            <v-col cols="auto" class="pt-6">
                 <v-btn size="large" color="deep-purple-accent-4" @click="toggleTaskModal">Add new task</v-btn>
             </v-col>
+        </v-row>
+    </v-container>
+    <v-container>
+        <v-row>
+            <Task v-for="taskData in tasks" :data="taskData" :key="taskData._id" />
         </v-row>
     </v-container>
 </template>

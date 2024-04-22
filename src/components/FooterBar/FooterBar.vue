@@ -1,22 +1,22 @@
     <template>
         <v-layout>
-            <v-bottom-navigation>
-                <v-footer class="bg-purple-accent-5">
-                    <v-row justify="center">
-
-                        <v-btn v-for="link in links" :key="link" class="" color="white" rounded="xl" variant="text">
-                            {{ link }}
-                        </v-btn>
-                        <v-btn v-for="icon in icons" :key="icon" class="" color="white" rounded="xl" variant="text">
-                            {{ icon }}
-                        </v-btn>
-                    </v-row>
-
+            <v-bottom-navigation height="auto">
+                <v-footer :elevation="1">
+                    <v-container class="py-2">
+                        <v-row justify="center">
+                            <v-btn class="py-1" v-for="link in links" :key="link" variant="text" density="comfortable">
+                                {{ link }}
+                            </v-btn>
+                        </v-row>
+                        <v-row justify="center">
+                            <v-btn class="py-1" v-for="icon in icons" :key="icon" variant="text" density="comfortable">
+                                <v-icon>{{ icon }}</v-icon>
+                            </v-btn>
+                        </v-row>
+                    </v-container>
                 </v-footer>
             </v-bottom-navigation>
         </v-layout>
-
-
     </template>
 
 <script src="./footerBar.js"></script>
