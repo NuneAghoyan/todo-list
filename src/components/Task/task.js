@@ -10,6 +10,11 @@ export default {
             required: true
         }
     },
+    methods: {
+        onDelete(id) {
+            this.$emit("delete-task", id);
+        },
+    },
     computed: {
         createdAt() {
             return this.data.created_at.slice(0, 10);

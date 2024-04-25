@@ -19,3 +19,9 @@ export default {
   </main>
   <FooterBar />
 </template>
+
+<style scoped>
+main {
+  margin-bottom: 100px;
+}
+</style>
