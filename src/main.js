@@ -1,18 +1,28 @@
 import './assets/main.css';
 import 'vuetify/styles';
+import '@mdi/font/css/materialdesignicons.css'
+import ToastPlugin from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-default.css';
 
 import { createApp } from 'vue';
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import App from './App.vue';
-import '@mdi/font/css/materialdesignicons.css'
+
 
 const vuetify = createVuetify({
     components,
     directives
 });
 
-createApp(App).use(vuetify, {
-    iconfont: 'mdi' // 'md' || 'mdi' || 'fa' || 'fa4'
-}).mount('#app')
+const app = createApp(App);
+app.use(vuetify, {
+    iconfont: 'mdi'
+});
+app.use(ToastPlugin, {
+    duration: 5000,
+    position: 'bottom-left',
+    dismissible: true
+});
+app.mount('#app');

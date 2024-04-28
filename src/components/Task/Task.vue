@@ -16,31 +16,16 @@
             Created at: {{ createdAt }}
         </v-card-text>
         <v-card-text>
-            Due date: {{ data.date }}
-            <!-- {{ dueTime }} -->
+            Due date: {{ dueDate }}
         </v-card-text>
-
-        <!-- <v-container class="text-center">
-                <v-row justify="center">
-                    <v-col cols="12" md="4" sm="6">
-                        <v-btn rounded="lg" elevated="1" color="success" block>Done</v-btn>
-                    </v-col>
-                    <v-col cols="12" md="4" sm="6">
-                        <v-btn rounded="lg" elevated="1" color="warning" block>Edit</v-btn>
-                    </v-col>
-                    <v-col cols="12" md="4" sm="6">
-                        <v-btn rounded="lg" elevated="1" color="error" block>Delete</v-btn>
-                    </v-col>
-                </v-row>
-            </v-container> -->
         <v-card-actions>
-            <v-btn color="success" variant="elevated">
+            <v-btn :color="checked" variant="elevated" @click="onChangeStatus">
                 <v-icon icon="mdi-check-outline" />
             </v-btn>
-            <v-btn color="warning" variant="elevated">
+            <v-btn color="warning" variant="elevated" @click="onEdit">
                 <v-icon icon="mdi-archive-edit-outline" />
             </v-btn>
-            <v-btn color="error" variant="elevated" @click="onDelete(data._id)">
+            <v-btn color="error" variant="elevated" @click="onDelete">
                 <v-icon icon=" mdi-delete-outline" />
             </v-btn>
         </v-card-actions>
