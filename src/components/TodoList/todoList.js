@@ -73,15 +73,13 @@ export default {
             taskApi
                 .updateTask(chekTask)
                 .then((chekedTask) => {
-                    if (chekedTask.status === 'active') {
-                        chekedTask.status = "done";
-                        this.$toast.success('The task have been done!');
-                    } else {
-                        chekedTask.status = "active";
-                        this.$toast.success('The task have been active!');
-                    }
                     let index = this.tasks.findIndex(task => task._id === chekedTask._id);
                     this.tasks[index] = chekedTask;
+                    if (chekedTask.status === 'active') {
+                        this.$toast.success('The task have been active!');
+                    } else {
+                        this.$toast.success('The task have been done!');
+                    }
                 })
                 .catch(this.handleError)
         },

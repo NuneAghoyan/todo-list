@@ -39,11 +39,9 @@ export default {
                 title: this.title.trim(),
                 description: this.description
             }
-
             if (this.dueDate && this.dueDate !== "none") {
                 task.date = this.dueDate.toISOString().slice(0, 10)
             }
-
             if (this.editingTask) {
                 this.$emit('taskSave', {
                     ...this.editingTask,
