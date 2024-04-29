@@ -14,7 +14,6 @@ export default {
             isTaskModalOpen: false,
             tasks: [],
             editingTask: null,
-            // deletingTask: null,
         }
     },
     created() {
@@ -84,12 +83,11 @@ export default {
                 .catch(this.handleError)
         },
 
-        onTaskDelete(deletingTask) {
-            // this.deletingTask = deletingTask;
+        onTaskDelete(taskId) {
             taskApi
-                .deleteTask(deletingTask)
-                .then((delTask) => {
-                    this.tasks = this.tasks.filter((task) => task._id !== delTask._id);
+                .deleteTask(taskId)
+                .then((id) => {
+                    this.tasks = this.tasks.filter((task) => task._id !== id);
                     this.$toast.success('The task have been deleted!');
                 })
                 .catch(this.handleError)

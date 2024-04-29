@@ -16,19 +16,17 @@ export default {
             if (this.data.date && this.data.date !== "none") {
                 task.date = new Date(this.data.date).toISOString().slice(0, 10)
             }
-            if (this.data.status === 'active') {
-                task.status = "done";
-            } else {
-                task.status = "active";
-            }
+            task.status = this.data.status === 'active' ? "done" : "active";
             this.$emit('changeTaskStatus', {
                 ...this.data,
                 ...task
             });
         },
+
         onEdit() {
             this.$emit('taskEdit');
         },
+
         onDelete() {
             this.$emit("deleteTask");
         },

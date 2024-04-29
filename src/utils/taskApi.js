@@ -54,7 +54,6 @@ class TaskApi {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(task)
         };
         return this.request(url, params);
     }
