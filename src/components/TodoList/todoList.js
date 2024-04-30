@@ -12,11 +12,24 @@ export default {
     data() {
         return {
             isTaskModalOpen: false,
-            tasks: []
+            tasks: [],
+            editingTask: null,
         }
     },
     created() {
         this.getTasks();
+    },
+    watch: {
+        editingTask(newValue) {
+            if (newValue) {
+                this.isTaskModalOpen = true;
+            }
+        },
+        isTaskModalOpen(isOpen) {
+            if (!isOpen && this.editingTask) {
+                this.editingTask = null;
+            }
+        },
     },
     methods: {
         toggleTaskModal() {
@@ -28,20 +41,61 @@ export default {
                 .then((tasks) => {
                     this.tasks = tasks;
                 })
-                .catch((err) => {
-                    console.log('err', err);
-                })
+                .catch(this.handleError)
         },
-        onTaskSave(task) {
+        onTaskAdd(task) {
             taskApi
                 .addNewTask(task)
                 .then((newTask) => {
-                    this.tasks.push(newTask);
+                    this.tasks.push(newTask)
+                    this.toggleTaskModal()
+                    this.$toast.success('The task have been created successfully!')
+                })
+                .catch(this.handleError)
+        },
+        onTaskSave(editedTask) {
+            taskApi
+                .updateTask(editedTask)
+                .then((updatedTask) => {
+                    let index = this.tasks.findIndex(task => task._id === updatedTask._id)
+                    this.tasks[index] = updatedTask;
                     this.toggleTaskModal();
+                    this.$toast.success('The task have been updated successfully!');
                 })
-                .catch((err) => {
-                    console.log('err', err);
+                .catch(this.handleError)
+        },
+        onTaskEdit(editingTask) {
+            this.editingTask = editingTask;
+        },
+
+        onTaskChecked(chekTask) {
+            taskApi
+                .updateTask(chekTask)
+                .then((chekedTask) => {
+                    let index = this.tasks.findIndex(task => task._id === chekedTask._id);
+                    this.tasks[index] = chekedTask;
+                    if (chekedTask.status === 'active') {
+                        this.$toast.success('The task have been active!');
+                    } else {
+                        this.$toast.success('The task have been done!');
+                    }
                 })
-        }
+                .catch(this.handleError)
+        },
+
+        onTaskDelete(taskId) {
+            taskApi
+                .deleteTask(taskId)
+                .then((id) => {
+                    this.tasks = this.tasks.filter((task) => task._id !== id);
+                    this.$toast.success('The task have been deleted!');
+                })
+                .catch(this.handleError)
+        },
+
+        handleError(error) {
+            this.$toast.error(error.message);
+        },
+
     }
 }

@@ -6,7 +6,6 @@ class TaskApi {
             if (res.status >= 500) {
                 throw new Error('Something went wrong, please, try again later!');
             }
-
             const result = await res.json()
             if (res.status >= 300 && result.error) {
                 throw new Error(result.error.message);
@@ -35,10 +34,29 @@ class TaskApi {
         }
         return this.request(url, params);
     }
-    getSingleTask() { }
-    deleteTask(id) {
-        this.tasks = this.tasks.filter((task) => task._id !== id);
+    getSingleTask() {
+    }
+    updateTask(task) {
+        const url = `${this.apiHost}/task/${task._id}`;
+        const params = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(task)
+        };
+        return this.request(url, params);
+    }
+    deleteTask(task) {
+        const url = `${this.apiHost}/task/${task._id}`;
+        const params = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        return this.request(url, params);
     }
 }
 
-export default TaskApi
+export default TaskApi;
