@@ -12,7 +12,7 @@
         <v-row>
             <v-col v-for="taskData in tasks" :key="taskData._id" cols="12" md="6" lg="4" xl="3">
                 <Task :data="taskData" @changeTaskStatus="onTaskChecked" @taskEdit="onTaskEdit(taskData)"
-                    @deleteTask="onTaskDelete(taskData)" />
+                    @deleteTask="onTaskDelete(taskData._id)" />
             </v-col>
         </v-row>
     </v-container>

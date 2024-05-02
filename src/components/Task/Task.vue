@@ -20,13 +20,14 @@
         </v-card-text>
         <v-card-actions>
             <v-btn :color="checked" variant="elevated" @click="onChangeStatus">
-                <v-icon icon="mdi-check-outline" />
+                <v-icon v-if="active" icon="mdi-check-outline" />
+                <v-icon v-else icon="mdi-undo-variant" />
             </v-btn>
             <v-btn color="warning" variant="elevated" @click="onEdit">
                 <v-icon icon="mdi-archive-edit-outline" />
             </v-btn>
             <v-btn color="error" variant="elevated" @click="onDelete">
-                <v-icon icon=" mdi-delete-outline" />
+                <v-icon icon="mdi-delete-outline" />
             </v-btn>
         </v-card-actions>
     </v-card>

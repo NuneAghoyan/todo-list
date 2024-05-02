@@ -1,8 +1,20 @@
 class TaskApi {
-    apiHost = 'http://localhost:3001'
+    apiHost = import.meta.env.VITE_API_HOST
 
-    request(url, params) {
-        return fetch(url, params).then(async (res) => {
+    request(method, url = '', body) {
+        const params = {
+            method,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        if (body) {
+            params.body = JSON.stringify(body);
+        }
+
+        const host = `${this.apiHost}/task/${url}`
+
+        return fetch(host, params).then(async (res) => {
             if (res.status >= 500) {
                 throw new Error('Something went wrong, please, try again later!');
             }
@@ -14,49 +26,19 @@ class TaskApi {
         })
     }
     addNewTask(task) {
-        const url = `${this.apiHost}/task`
-        const params = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(task)
-        }
-        return this.request(url, params)
+        return this.request('POST', '', task);
     }
     getTasks() {
-        const url = `${this.apiHost}/task`
-        const params = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        return this.request(url, params);
+        return this.request('GET');
     }
     getSingleTask() {
     }
     updateTask(task) {
-        const url = `${this.apiHost}/task/${task._id}`;
-        const params = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(task)
-        };
-        return this.request(url, params);
+        return this.request('PUT', task._id, task);
     }
-    deleteTask(task) {
-        const url = `${this.apiHost}/task/${task._id}`;
-        const params = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        };
-        return this.request(url, params);
+    deleteTask(taskId) {
+        return this.request('DELETE', taskId);
     }
 }
 
-export default TaskApi;
+export default TaskApi

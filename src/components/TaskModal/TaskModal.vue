@@ -6,7 +6,7 @@
                     <v-row dense>
                         <v-col cols="12" sm="12">
                             <v-text-field :class="{ invalid: !isTitleValid }" label="Title*" required v-model="title"
-                                autofocus></v-text-field>
+                                ref="title"></v-text-field>
                         </v-col>
                         <v-col cols="12" sm="12">
                             <v-textarea label="Description" v-model="description"></v-textarea>

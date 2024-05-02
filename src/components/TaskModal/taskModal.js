@@ -21,27 +21,25 @@ export default {
     },
     created() {
         if (this.editingTask) {
-            this.title = this.editingTask.title;
-            this.description = this.editingTask.description;
-            if (!this.editingTask.date) {
-                this.dueDate = "none";
-            } else {
-                this.dueDate = new Date(this.editingTask.date);
-            }
+            const { title, description, date } = this.editingTask;
+            this.title = title;
+            this.description = description;
+            this.dueDate = date ? new Date(date) : '';
         }
+    },
+    mounted() {
+        this.$refs.title.focus();
     },
     methods: {
         onClose() {
-            this.$emit('close');
+            this.$emit('close')
         },
         onSave() {
             const task = {
                 title: this.title.trim(),
                 description: this.description
             }
-            if (this.dueDate && this.dueDate !== "none") {
-                task.date = this.dueDate.toISOString().slice(0, 10)
-            }
+            task.date = this.dueDate ? new Date(this.dueDate).toISOString().slice(0, 10) : '';
             if (this.editingTask) {
                 this.$emit('taskSave', {
                     ...this.editingTask,
@@ -50,9 +48,6 @@ export default {
                 return
             }
             this.$emit('taskAdd', task);
-        },
-        onTitleInput(event) {
-            this.title = event.target.value;
         }
     },
     computed: {
@@ -60,10 +55,7 @@ export default {
             return !!this.title.trim();
         },
         modalTitle() {
-            if (this.editingTask) {
-                return 'Edit task';
-            }
-            return 'Add new task';
+            return this.editingTask ? 'Edit task' : 'Add new task';
         }
     }
 }
