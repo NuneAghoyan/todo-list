@@ -13,7 +13,6 @@ export default {
     methods: {
         onChangeStatus() {
             const task = {};
-            task.date = this.data.date ? new Date(this.data.date).toISOString().slice(0, 10) : "";
             task.status = this.data.status === "active" ? "done" : "active";
             this.$emit("changeTaskStatus", {
                 ...this.data,
