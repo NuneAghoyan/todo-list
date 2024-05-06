@@ -1,25 +1,25 @@
 <template>
-    <v-card class="mx-auto mb-2 ps-5" elevation="16" color="green-lighten-5" width="auto" height="400">
+    <v-container>
+        <task-modal v-if="isTaskModalOpen" :isOpen="isTaskModalOpen" :editingTask="editingTask" @close="toggleTaskModal"
+            @taskSave="onTaskSave" />
+    </v-container>
+    <v-card v-if="task" class="mx-auto mb-2 mt-10 ps-5" elevation="16" color="green-lighten-5" max-width="600">
         <v-card-item>
-            <Checkbox />
-            <v-card-title>
-                {{ data.title }}
+            <v-card-title class="text-wrap">
+                {{ task.title }}
             </v-card-title>
         </v-card-item>
         <v-card-text>
-            {{ data.description }}
+            {{ task.description }}
         </v-card-text>
         <v-card-text class="pt-0">
-            Status: {{ data.status }}
+            Status: {{ task.status }}
         </v-card-text>
         <v-card-text class="pt-0">
             Created at: {{ createdAt }}
         </v-card-text>
         <v-card-text class="pt-0">
             Due date: {{ dueDate }}
-        </v-card-text>
-        <v-card-text class="pt-0">
-            <RouterLink :to="`/task/${data._id}`">Show more...</RouterLink>
         </v-card-text>
         <v-card-actions>
             <v-btn :color="checked" variant="elevated" @click="onChangeStatus">
@@ -34,6 +34,7 @@
             </v-btn>
         </v-card-actions>
     </v-card>
+    <h4 v-else>Task not found!</h4>
 </template>
 
-<script src="./task.js"></script>
+<script src="./singleTask.js"></script>

@@ -2,17 +2,11 @@
 export default {
     data() {
         return {
-            links: [
-                'Home',
-                'About Us',
-                'Contact Us',
-            ],
-
-            // menuItems: [
-            //     { title: 'Home', path: '/home' },
-            //     { title: 'Sign Up', path: '/signup' },
-            //     { title: 'Sign In', path: '/signin' }
-            // ]
+            menuItems: [
+                { title: 'Home', path: '/' },
+                { title: 'About Us', path: '/about' },
+                { title: 'Contact Us', path: '/contact-us' }
+            ]
 
         }
     },

@@ -1,12 +1,10 @@
 <script>
 import MenuBar from './components/MenuBar/MenuBar.vue';
-import TodoList from './components/TodoList/TodoList.vue';
 import FooterBar from './components/FooterBar/FooterBar.vue';
 
 export default {
   components: {
     MenuBar,
-    TodoList,
     FooterBar
   }
 }
@@ -15,7 +13,7 @@ export default {
 <template>
   <MenuBar />
   <main>
-    <TodoList />
+    <RouterView />
   </main>
   <FooterBar />
 </template>
