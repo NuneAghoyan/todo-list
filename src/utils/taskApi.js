@@ -31,7 +31,8 @@ class TaskApi {
     getTasks() {
         return this.request('GET');
     }
-    getSingleTask() {
+    getSingleTask(taskId) {
+        return this.request('GET', taskId);
     }
     updateTask(task) {
         return this.request('PUT', task._id, task);

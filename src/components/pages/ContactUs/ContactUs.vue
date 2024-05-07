@@ -1,5 +1,7 @@
 <template>
-    <form>
+
+    <h1 class="mt-10">Contact us</h1>
+    <!-- <form>
         <v-text-field v-model="state.name" :counter="10" :error-messages="v$.name.$errors.map(e => e.$message)"
             label="Name" required @blur="v$.name.$touch" @input="v$.name.$touch"></v-text-field>
 
@@ -18,6 +20,7 @@
         <v-btn @click="clear">
             Clear
         </v-btn>
-    </form>
+    </form> -->
+
 </template>
 <script src="./contactUs.js"></script>
