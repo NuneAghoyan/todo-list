@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <task-modal v-if="isTaskModalOpen" :isOpen="isTaskModalOpen" :editingTask="editingTask" @close="toggleTaskModal"
+        <task-modal v-if="isTaskModalOpen" :isOpen="isTaskModalOpen" :editingTask="task" @close="toggleTaskModal"
             @taskSave="onTaskSave" />
     </v-container>
     <v-card v-if="task" class="mx-auto mb-2 mt-10 ps-5" elevation="16" color="green-lighten-5" max-width="600">
@@ -22,11 +22,11 @@
             Due date: {{ dueDate }}
         </v-card-text>
         <v-card-actions>
-            <v-btn :color="checked" variant="elevated" @click="onChangeStatus">
+            <v-btn :color="checked" variant="elevated" @click="onChangeStatus(task)">
                 <v-icon v-if="active" icon="mdi-check-outline" />
                 <v-icon v-else icon="mdi-undo-variant" />
             </v-btn>
-            <v-btn color="warning" variant="elevated" @click="onEdit">
+            <v-btn color="warning" variant="elevated" @click="toggleTaskModal">
                 <v-icon icon="mdi-archive-edit-outline" />
             </v-btn>
             <v-btn color="error" variant="elevated" @click="onDelete">

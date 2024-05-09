@@ -1,12 +1,13 @@
 <template>
-    <v-card class="mx-auto mb-2 ps-5" elevation="16" color="green-lighten-5" width="auto" height="400">
+    <v-card class="mx-auto mb-2 px-5" elevation="16" color="green-lighten-5" width="auto" height="400">
         <v-card-item>
             <Checkbox />
             <v-card-title>
                 {{ data.title }}
             </v-card-title>
         </v-card-item>
-        <v-card-text>
+        <!-- <v-card-text class="text-no-wrap"> -->
+        <v-card-text class="description">
             {{ data.description }}
         </v-card-text>
         <v-card-text class="pt-0">
@@ -37,3 +38,10 @@
 </template>
 
 <script src="./task.js"></script>
+<style scoped>
+.description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+</style>
