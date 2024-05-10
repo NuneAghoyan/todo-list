@@ -6,7 +6,6 @@
                 {{ data.title }}
             </v-card-title>
         </v-card-item>
-        <!-- <v-card-text class="text-no-wrap"> -->
         <v-card-text class="description">
             {{ data.description }}
         </v-card-text>
