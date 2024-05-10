@@ -8,6 +8,14 @@
             </v-col>
         </v-row>
     </v-container>
+    <v-container class="position-fixed end-0 del">
+        <v-row>
+            <v-col align="end">
+                <v-btn size="large" color="error" @click="deleteTasks">Delete selected
+                    tasks</v-btn>
+            </v-col>
+        </v-row>
+    </v-container>
     <v-container>
         <v-row>
             <v-col v-for="taskData in tasks" :key="taskData._id" cols="12" md="6" lg="4" xl="3">
@@ -19,3 +27,10 @@
 </template>
 
 <script src="./todoList.js"></script>
+
+<style scoped>
+.del {
+    right: 0;
+    z-index: 10000;
+}
+</style>

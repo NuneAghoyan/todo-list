@@ -1,5 +1,5 @@
 <template>
-    <v-layout class=" pt-4 pb-4">
+    <v-layout class="pt-4 pb-4">
         <v-app-bar class="py-2" :elevation="1">
             <v-app-bar-title>Todo list</v-app-bar-title>
             <v-btn v-for="menuItem in menuItems" :key="menuItem.title" rounded="xl" variant="text" class="mx-4">
