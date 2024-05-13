@@ -1,8 +1,8 @@
 import { mapMutations } from 'vuex';
 import TaskApi from '../../../utils/taskApi.js';
-import TaskModal from '@/components/TaskModal/TaskModal.vue';
+import TaskModal from '../../TaskModal/TaskModal.vue';
 
-const taskApi = new TaskApi()
+const taskApi = new TaskApi();
 
 export default {
     components: {
@@ -34,7 +34,7 @@ export default {
                 })
                 .catch(this.handleError)
                 .finally(() => {
-                    this.toggleLoading()
+                    this.toggleLoading();
                 })
         },
 
