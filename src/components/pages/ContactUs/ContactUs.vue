@@ -1,26 +1,25 @@
 <template>
-
-    <h1 class="mt-10">Contact us</h1>
-    <!-- <form>
-        <v-text-field v-model="state.name" :counter="10" :error-messages="v$.name.$errors.map(e => e.$message)"
-            label="Name" required @blur="v$.name.$touch" @input="v$.name.$touch"></v-text-field>
-
-        <v-text-field v-model="state.email" :error-messages="v$.email.$errors.map(e => e.$message)" label="E-mail"
-            required @blur="v$.email.$touch" @input="v$.email.$touch"></v-text-field>
-
-        <v-select v-model="state.select" :error-messages="v$.select.$errors.map(e => e.$message)" :items="items"
-            label="Item" required @blur="v$.select.$touch" @change="v$.select.$touch"></v-select>
-
-        <v-checkbox v-model="state.checkbox" :error-messages="v$.checkbox.$errors.map(e => e.$message)"
-            label="Do you agree?" required @blur="v$.checkbox.$touch" @change="v$.checkbox.$touch"></v-checkbox>
-
-        <v-btn class="me-4" @click="v$.$validate">
-            Send
-        </v-btn>
-        <v-btn @click="clear">
-            Clear
-        </v-btn>
-    </form> -->
-
+    <h1 class="mt-10" align="center" justify="center">Contact us</h1>
+    <v-container>
+        <v-row align="center" justify="center">
+            <v-col cols="12" lg="6" md="6" sm="8" xs="12">
+                <v-sheet class="pa-10">
+                    <v-form ref="form">
+                        <v-text-field v-model.trim="name" :rules="nameRules" label="Name" required></v-text-field>
+                        <v-text-field v-model="email" :rules="emailRules" label="Email" required
+                            type="email"></v-text-field>
+                        <v-textarea v-model.trim="message" :rules="messageRules" label="Message" required></v-textarea>
+                        <div align="center" justify="center">
+                            <v-btn width="400px" class="mt-4" color="success" @click="send"> Send </v-btn>
+                        </div>
+                        <div align="center" justify="center">
+                            <v-btn width="400px" class="mt-4" color="error" @click="reset"> Reset Form </v-btn>
+                        </div>
+                    </v-form>
+                </v-sheet>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
+
 <script src="./contactUs.js"></script>

@@ -32,7 +32,6 @@
                     odit accusamus pariatur sequi? Corrupti, quisquam ullam. Quis deleniti et sint velit error repellat
                     quae at modi, maxime quisquam.
                 </p>
-
             </v-card-text>
         </v-card>
     </div>

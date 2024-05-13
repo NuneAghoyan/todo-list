@@ -1,4 +1,4 @@
-import Api from './api'
+import Api from './api';
 
 class TaskApi extends Api {
     entityName = 'task'
@@ -16,6 +16,9 @@ class TaskApi extends Api {
     }
     deleteTask(taskId) {
         return this.request('DELETE', taskId);
+    }
+    deleteTasks(taskIds) {
+        return this.request('PATCH', '', { tasks: taskIds });
     }
 }
 
