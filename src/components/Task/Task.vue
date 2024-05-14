@@ -1,7 +1,7 @@
 <template>
-    <v-card class="mx-auto mb-2 px-5" elevation="16" color="green-lighten-5" width="auto" height="400">
+    <v-card class="mx-auto mb-2 px-5" elevation="16" color="green-lighten-5" max-width="400" height="400">
         <v-card-item>
-            <Checkbox />
+            <v-checkbox @update:modelValue="onSelect" :modelValue="isSelected"></v-checkbox>
             <v-card-title>
                 {{ data.title }}
             </v-card-title>
@@ -21,7 +21,7 @@
         <v-card-text class="pt-0">
             <RouterLink :to="`/task/${data._id}`">Show more...</RouterLink>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions :class="{ mtop: hasDescription }">
             <v-btn :color="checked" variant="elevated" @click="onChangeStatus">
                 <v-icon v-if="active" icon="mdi-check-outline" />
                 <v-icon v-else icon="mdi-undo-variant" />
@@ -37,10 +37,15 @@
 </template>
 
 <script src="./task.js"></script>
+
 <style scoped>
 .description {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.mtop {
+    margin-top: 20px;
 }
 </style>

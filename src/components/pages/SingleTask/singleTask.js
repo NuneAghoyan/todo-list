@@ -1,8 +1,8 @@
 import { mapMutations } from 'vuex';
 import TaskApi from '../../../utils/taskApi.js';
-import TaskModal from '@/components/TaskModal/TaskModal.vue';
+import TaskModal from '../../TaskModal/TaskModal.vue';
 
-const taskApi = new TaskApi()
+const taskApi = new TaskApi();
 
 export default {
     components: {
@@ -34,7 +34,7 @@ export default {
                 })
                 .catch(this.handleError)
                 .finally(() => {
-                    this.toggleLoading()
+                    this.toggleLoading();
                 })
         },
 
@@ -45,7 +45,7 @@ export default {
                 .updateTask(editingTask)
                 .then(() => {
                     this.toggleTaskModal();
-                    this.$toast.success('The task have been updated successfully!');
+                    this.$toast.success('The task has been updated successfully!');
                 })
                 .catch(this.handleError)
                 .finally(() => {
@@ -59,7 +59,7 @@ export default {
             taskApi
                 .updateTask(editingTask)
                 .then(() => {
-                    let message = this.task.status === 'done' ? 'The task have been done!' : 'The task have been active!';
+                    let message = this.task.status === 'done' ? 'The task has been done!' : 'The task has been active!';
                     this.$toast.success(message);
                 })
                 .catch(this.handleError)
@@ -75,7 +75,7 @@ export default {
                 .deleteTask(singleTaskId)
                 .then(() => {
                     this.$router.push('/');
-                    this.$toast.success('The task have been deleted!');
+                    this.$toast.success('The task has been deleted!');
                 })
                 .catch(this.handleError)
                 .finally(() => {

@@ -18,7 +18,12 @@
     <div class="message-box">
         <h1>404</h1>
         <h2>Page not found</h2>
+        <div class="link">
+            <RouterLink to="/" class="link-button">Go to Home Page</RouterLink>
+        </div>
+
     </div>
+
 </template>
 
 <style scoped>
@@ -31,7 +36,7 @@ svg {
 }
 
 .message-box {
-    height: 200px;
+    height: 300px;
     width: 380px;
     position: absolute;
     top: 50%;
@@ -47,6 +52,27 @@ svg {
     font-size: 80px;
     line-height: 50px;
     margin-bottom: 40px;
+}
+
+.link {
+    margin-right: 10px;
+    margin-top: 40px;
+}
+
+.link-button {
+    background: #68c950;
+    padding: 8px 25px;
+    border-radius: 4px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.link-button:hover {
+    background: #5A5C6C;
+    color: #fff;
 }
 
 #Polygon-1,
@@ -96,5 +122,7 @@ svg {
         margin-left: -190px;
         text-align: center;
     }
+
+
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-center">
+    <div class="d-flex justify-center my-10">
         <v-card class="mt-10" width="800px">
             <v-card-title class="text-center text-md-h5 text-lg-h4 mt-5">About To-do lists</v-card-title>
             <v-card-text class="text-h6 mt-5 px-5">
@@ -32,7 +32,6 @@
                     odit accusamus pariatur sequi? Corrupti, quisquam ullam. Quis deleniti et sint velit error repellat
                     quae at modi, maxime quisquam.
                 </p>
-
             </v-card-text>
         </v-card>
     </div>

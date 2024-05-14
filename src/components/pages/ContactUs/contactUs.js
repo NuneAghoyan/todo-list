@@ -1,41 +1,54 @@
-// import { reactive } from 'vue'
-// import { useVuelidate } from '@vuelidate/core'
-// import { email, required } from '@vuelidate/validators'
+import { mapMutations } from 'vuex';
+import FormApi from '../../../utils/formApi.js';
+const formApi = new FormApi();
+const emailRegex = /^\S+@\S+\.\S+$/;
 
-// const initialState = {
-//     name: '',
-//     email: '',
-//     select: null,
-//     checkbox: null,
-// }
+export default {
+    data() {
+        return {
+            name: '',
+            email: '',
+            message: '',
+            nameRules: [(v) => !!v || 'Name is required'],
+            emailRules: [(v) => !!v || 'Email is required', (v) => emailRegex.test(v) || 'Invalid email'],
+        }
+    },
 
-// const state = reactive({
-//     ...initialState,
-// })
+    methods: {
+        ...mapMutations(['toggleLoading']),
 
-// const items = [
-//     'Item 1',
-//     'Item 2',
-//     'Item 3',
-//     'Item 4',
-// ]
+        async send() {
+            const isValid = await this.validate();
+            if (!isValid) {
+                return
+            }
+            const form = {
+                name: this.name,
+                email: this.email,
+                message: this.message
+            };
+            this.toggleLoading();
+            formApi
+                .sendForm(form)
+                .then(() => {
+                    this.reset();
+                    this.$toast.success('The form has been sent!');
+                })
+                .catch(this.handleError)
+                .finally(() => {
+                    this.toggleLoading();
+                })
+        },
 
-// const rules = {
-//     name: { required },
-//     email: { required, email },
-//     select: { required },
-//     items: { required },
-//     checkbox: { required },
-// }
-
-// const v$ = useVuelidate(rules, state)
-
-// function clear() {
-//     v$.value.$reset()
-
-//     for (const [key, value] of Object.entries(initialState)) {
-//         state[key] = value
-//     }
-// }
-
-export default {}
+        async validate() {
+            const { valid } = await this.$refs.form.validate();
+            return valid;
+        },
+        reset() {
+            this.$refs.form.reset();
+        },
+        handleError(error) {
+            this.$toast.error(error.message);
+        },
+    }
+}

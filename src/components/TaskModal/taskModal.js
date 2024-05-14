@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         onClose() {
-            this.$emit('close')
+            this.$emit('close');
         },
         onSave() {
             const task = {

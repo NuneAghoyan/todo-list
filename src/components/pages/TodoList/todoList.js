@@ -1,6 +1,7 @@
 import { mapMutations } from 'vuex';
-import TaskModal from '@/components/TaskModal/TaskModal.vue';
-import Task from '@/components/Task/Task.vue'
+import TaskModal from '../../TaskModal/TaskModal.vue';
+import ConfirmDialog from '../../ConfirmDialog/ConfirmDialog.vue';
+import Task from '../../Task/Task.vue';
 import TaskApi from '../../../utils/taskApi.js';
 
 const taskApi = new TaskApi();
@@ -8,13 +9,16 @@ const taskApi = new TaskApi();
 export default {
     components: {
         TaskModal,
+        ConfirmDialog,
         Task
     },
     data() {
         return {
             isTaskModalOpen: false,
             tasks: [],
-            editingTask: null
+            editingTask: null,
+            selectedTasks: new Set(),
+            isDeleteDialogOpen: false
         }
     },
     created() {
@@ -32,6 +36,16 @@ export default {
             }
         }
     },
+
+    computed: {
+        isDeleteSelectedBtnDisabled() {
+            return !this.selectedTasks.size;
+        },
+        confirmDialogText() {
+            return `You are going to delete ${this.selectedTasks.size} task(s), are you sure?`;
+        }
+    },
+
     methods: {
         ...mapMutations(['toggleLoading']),
         toggleTaskModal() {
@@ -56,11 +70,11 @@ export default {
                 .then((newTask) => {
                     this.tasks.push(newTask);
                     this.toggleTaskModal();
-                    this.$toast.success('The task have been created successfully!');
+                    this.$toast.success('The task has been created successfully!');
                 })
                 .catch(this.handleError)
                 .finally(() => {
-                    this.toggleLoading()
+                    this.toggleLoading();
                 })
         },
 
@@ -71,11 +85,11 @@ export default {
                 .then((updatedTask) => {
                     this.findAndReplaceTask(updatedTask);
                     this.toggleTaskModal();
-                    this.$toast.success('The task have been updated successfully!');
+                    this.$toast.success('The task has been updated successfully!');
                 })
                 .catch(this.handleError)
                 .finally(() => {
-                    this.toggleLoading()
+                    this.toggleLoading();
                 })
         },
         onTaskEdit(editingTask) {
@@ -92,12 +106,12 @@ export default {
                 .updateTask(editedTask)
                 .then((updatedTask) => {
                     this.findAndReplaceTask(updatedTask);
-                    let message = updatedTask.status === 'done' ? 'The task have been done!' : 'The task have been active!';
+                    let message = updatedTask.status === 'done' ? 'The task has been done!' : 'The task has been active!';
                     this.$toast.success(message);
                 })
                 .catch(this.handleError)
                 .finally(() => {
-                    this.toggleLoading()
+                    this.toggleLoading();
                 })
         },
 
@@ -107,16 +121,42 @@ export default {
                 .deleteTask(taskId)
                 .then(() => {
                     this.tasks = this.tasks.filter((task) => task._id !== taskId);
-                    this.$toast.success('The task have been deleted!');
+                    this.$toast.success('The task has been deleted!');
                 })
                 .catch(this.handleError)
                 .finally(() => {
-                    this.toggleLoading()
+                    this.toggleLoading();
                 })
         },
 
-        deleteTasks() {
+        onSelectedTasksDelete() {
+            this.toggleLoading();
+            taskApi
+                .deleteTasks([...this.selectedTasks])
+                .then(() => {
+                    this.tasks = this.tasks.filter((task) => !this.selectedTasks.has(task._id));
+                    this.toggleDeleteDialog();
+                    this.$toast.success('The selected tasks have been deleted successfully!');
+                })
+                .catch(this.handleError)
+                .finally(() => {
+                    this.toggleLoading();
+                })
+        },
 
+        toggleDeleteDialog() {
+            this.isDeleteDialogOpen = !this.isDeleteDialogOpen;
+            if (!this.isDeleteDialogOpen) {
+                this.selectedTasks.clear();
+            }
+        },
+
+        toggleTaskId(taskId) {
+            if (this.selectedTasks.has(taskId)) {
+                this.selectedTasks.delete(taskId);
+            } else {
+                this.selectedTasks.add(taskId);
+            }
         },
 
         handleError(error) {

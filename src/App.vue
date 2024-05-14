@@ -17,16 +17,28 @@ export default {
 </script>
 
 <template>
-  <Loader v-if="isLoading" />
-  <MenuBar />
-  <main>
-    <RouterView />
-  </main>
-  <FooterBar />
+  <div class="wrapper">
+    <Loader v-if="isLoading" />
+    <MenuBar />
+    <main>
+      <RouterView />
+    </main>
+    <FooterBar />
+  </div>
 </template>
 
+
 <style scoped>
+.wrapper {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 main {
-  margin-bottom: 100px;
+  flex: 1 0 auto;
 }
 </style>
