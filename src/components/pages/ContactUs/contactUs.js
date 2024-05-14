@@ -11,7 +11,6 @@ export default {
             message: '',
             nameRules: [(v) => !!v || 'Name is required'],
             emailRules: [(v) => !!v || 'Email is required', (v) => emailRegex.test(v) || 'Invalid email'],
-            messageRules: [(v) => !!v || 'Message is required'],
         }
     },
 
@@ -33,7 +32,7 @@ export default {
                 .sendForm(form)
                 .then(() => {
                     this.reset();
-                    this.$toast.success('The form has been send!');
+                    this.$toast.success('The form has been sent!');
                 })
                 .catch(this.handleError)
                 .finally(() => {

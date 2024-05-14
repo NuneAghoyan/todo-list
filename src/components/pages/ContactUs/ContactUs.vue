@@ -8,7 +8,7 @@
                         <v-text-field v-model.trim="name" :rules="nameRules" label="Name" required></v-text-field>
                         <v-text-field v-model="email" :rules="emailRules" label="Email" required
                             type="email"></v-text-field>
-                        <v-textarea v-model.trim="message" :rules="messageRules" label="Message" required></v-textarea>
+                        <v-textarea v-model.trim="message" label="Message"></v-textarea>
                         <div align="center" justify="center">
                             <v-btn width="400px" class="mt-4" color="success" @click="send"> Send </v-btn>
                         </div>
