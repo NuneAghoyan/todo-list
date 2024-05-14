@@ -136,7 +136,6 @@ export default {
                 .then(() => {
                     this.tasks = this.tasks.filter((task) => !this.selectedTasks.has(task._id));
                     this.toggleDeleteDialog();
-                    this.selectedTasks.clear();
                     this.$toast.success('The selected tasks have been deleted successfully!');
                 })
                 .catch(this.handleError)
