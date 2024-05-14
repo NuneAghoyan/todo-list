@@ -70,7 +70,7 @@ export default {
                 .then((newTask) => {
                     this.tasks.push(newTask);
                     this.toggleTaskModal();
-                    this.$toast.success('The task have been created successfully!');
+                    this.$toast.success('The task has been created successfully!');
                 })
                 .catch(this.handleError)
                 .finally(() => {
@@ -85,7 +85,7 @@ export default {
                 .then((updatedTask) => {
                     this.findAndReplaceTask(updatedTask);
                     this.toggleTaskModal();
-                    this.$toast.success('The task have been updated successfully!');
+                    this.$toast.success('The task has been updated successfully!');
                 })
                 .catch(this.handleError)
                 .finally(() => {
@@ -106,7 +106,7 @@ export default {
                 .updateTask(editedTask)
                 .then((updatedTask) => {
                     this.findAndReplaceTask(updatedTask);
-                    let message = updatedTask.status === 'done' ? 'The task have been done!' : 'The task have been active!';
+                    let message = updatedTask.status === 'done' ? 'The task has been done!' : 'The task has been active!';
                     this.$toast.success(message);
                 })
                 .catch(this.handleError)
@@ -121,7 +121,7 @@ export default {
                 .deleteTask(taskId)
                 .then(() => {
                     this.tasks = this.tasks.filter((task) => task._id !== taskId);
-                    this.$toast.success('The task have been deleted!');
+                    this.$toast.success('The task has been deleted!');
                 })
                 .catch(this.handleError)
                 .finally(() => {

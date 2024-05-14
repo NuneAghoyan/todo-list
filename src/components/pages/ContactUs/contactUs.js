@@ -33,7 +33,7 @@ export default {
                 .sendForm(form)
                 .then(() => {
                     this.reset();
-                    this.$toast.success('The form have been send!');
+                    this.$toast.success('The form has been send!');
                 })
                 .catch(this.handleError)
                 .finally(() => {
